@@ -29,11 +29,13 @@
           <transition name="drop"
                       v-on:before-enter = "beforeEnter"
                       v-on:enter="enter"
-                      v-on:afeter-enter="afterEnter"
+                      v-on:after-enter="afterEnter"
                       v-for="(ball,index) in balls">
+
           <div class="ball" v-show="ball.show" >
             <div class="inner inner-hook"></div>
           </div>
+
           </transition>
 
         </div>
@@ -181,6 +183,11 @@
       this.$root.eventHub.$on('cart.add', this.drop)
     },
     methods:{
+      /*1.0 第一次点击的时候 拿出任意 一个Obj 对象，绑定cartcontrol、show 2.0 v-for 执行li的动画，便利取出Obj.cartControl.show ,
+       * 得到 要动画的cartControl的位置。3.0 拿出当前执行动画的 球形对象 ball，进行动画 ps(ball是循环利用的，当太快，drop决定了 最近一个动画 不会被执行)
+        *
+        *
+        * **/
       beforeEnter(el) {
         let count = this.balls.length
         while (count--) {
@@ -215,15 +222,16 @@
           el.style.display = 'none'
         }
       },
+
         drop(el){
-          for (let i = 0, l = this.balls.length; i < l; i++) {
-            let ball = this.balls[i]
-            if (!ball.show) {
-              ball.show = true
-              ball.el = el
-              this.dropBalls.push(ball)
-              return
-            }
+          for(let i = 0; i < this.balls.length ;i++){
+              let ball = this.balls[i];
+              if (!ball.show){
+                  ball.show = true;
+                  ball.el = el;
+                  this.dropBalls.push(ball);
+                  return;
+              }
           }
         },
         toggleList(){
