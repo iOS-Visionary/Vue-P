@@ -39,7 +39,7 @@
         </div>
 
         <transition name="fade">
-        <div class="detail" v-show="detailShow" transition="fade">
+        <div class="detail" v-show="detailShow" >
           <div class="detail-wrapper clearfix">
             <div class="detail-main">
               <h1 class="name">{{seller.name}}</h1>
@@ -242,7 +242,7 @@
       background: rgba(7, 17, 27, 0.8)
       &.fade-enter-active,&.fade-leave-active
         transition opacity 0.5s
-      &.fade-enter,&.fade-leave
+      &.fade-enter,&.fade-leave-to
         opacity:0
       .detail-wrapper
         width:100%
@@ -318,5 +318,6 @@
         margin -64px auto 0 auto
         clear both
         font-size 32px
+        color rgba(255,255,255,0.5)
 </style>
 
