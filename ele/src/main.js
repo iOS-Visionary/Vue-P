@@ -11,6 +11,9 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  data: {
+    eventHub: new Vue()
+  }
 })
 router.push('/goods')

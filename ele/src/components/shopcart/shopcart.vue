@@ -25,9 +25,17 @@
 
         <!--待定-->
         <div class="ball-container">
-          <div class="ball" v-show="ball.show" v-for="(ball,index) in balls">
+
+          <transition name="drop"
+                      v-on:before-enter = "beforeEnter"
+                      v-on:enter="enter"
+                      v-on:afeter-enter="afterEnter"
+                      v-for="(ball,index) in balls">
+          <div class="ball" v-show="ball.show" >
             <div class="inner inner-hook"></div>
           </div>
+          </transition>
+
         </div>
 
         <!--购买清单-->
@@ -47,7 +55,7 @@
                   </span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food"></cartcontrol>
+                  <cartcontrol :food="food" v-on:card.add="drop"></cartcontrol>
                 </div>
               </li>
             </ul>
@@ -61,9 +69,13 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Vue from 'vue'
   import BScroll from 'better-scroll';
   import cartcontrol from "../cartcontrol/cartcontrol.vue"
+  var eventHub = new Vue()
+
   export default{
+
     components:{
       cartcontrol
     },
@@ -161,12 +173,58 @@
                   }
               });
           }
+
           return show;
         }
     },
+    created() {
+      this.$root.eventHub.$on('cart.add', this.drop)
+    },
     methods:{
+      beforeEnter(el) {
+        let count = this.balls.length
+        while (count--) {
+          let ball = this.balls[count]
+          if (ball.show) {
+            let rect = ball.el.getBoundingClientRect()
+            let x = rect.left - 32;
+            let y = -(window.innerHeight - rect.top - 22)
+            el.style.display = ''
+            el.style.webkitTransform = `translate3d(0,${y}px,0)`
+            el.style.transform = `translate3d(0,${y}px,0)`
+            let inner = el.querySelector('.inner-hook')
+            inner.style.webkitTransform = `translate3d(${x}px,0,0)`
+            inner.style.transform = `translate3d(${x}px,0,0)`
+          }
+        }
+      },
+      enter(el) {
+        el.offsetHeight // 触发浏览器重绘，offsetWidth、offsetTop等方法都可以触发
+        this.$nextTick(() => {
+          el.style.webkitTransform = 'translate3d(0,0,0)'
+          el.style.transform = 'translate3d(0,0,0)'
+          let inner = el.querySelector('.inner-hook')
+          inner.style.webkitTransform = 'translate3d(0,0,0)'
+          inner.style.transform = 'translate3d(0,0,0)'
+        })
+      },
+      afterEnter(el) {
+        let ball = this.dropBalls.shift()
+        if (ball) {
+          ball.show = false
+          el.style.display = 'none'
+        }
+      },
         drop(el){
-
+          for (let i = 0, l = this.balls.length; i < l; i++) {
+            let ball = this.balls[i]
+            if (!ball.show) {
+              ball.show = true
+              ball.el = el
+              this.dropBalls.push(ball)
+              return
+            }
+          }
         },
         toggleList(){
           if(!this.totalCount){
@@ -227,7 +285,7 @@
             border-radius 50%
             text-align center
             background: #2b343c
-            &.highleight
+            &.highlight
               background: rgb(0, 160, 220)
             .icon-shopping_cart
               line-height: 44px
@@ -276,16 +334,19 @@
             background: #00b43c
             color: #fff
     .ball-container
-      .ball
-        position fixed
-        left 32px
-        bottom 22px
-        z-index 200
+    .ball
+      position fixed
+      left 32px
+      bottom 22px
+      z-index 200
+      &.drop-enter,&.drop-enter-active
+        transition all 0.4s cubic-bezier(0.49,-0.29,0.75,0.41)
         .inner
-          width: 16px
-          height: 16px
-          border-radius: 50%
-          background: rgb(0, 160, 220)
+          width 16px
+          height 16px
+          border-radius 50%
+          background rgb(0,160,220)
+          transition all 0.4s linear
     .shopcart-list
       position absolute
       left: 0
