@@ -244,6 +244,7 @@
         transition opacity 0.5s
       &.fade-enter,&.fade-leave-to
         opacity:0
+
       .detail-wrapper
         width:100%
         min-height 100%
