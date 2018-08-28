@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="goods">
         <div class="menu-wrapper" ref="menuWrapper">
           <ul>
@@ -45,6 +46,8 @@
         </div>
       <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
+    <food :food="selectedFood" ref="food"></food>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -52,6 +55,7 @@
     import axios from 'axios'
     import shopcart from '../shopcart/shopcart.vue'
     import cartcontrol from '../cartcontrol/cartcontrol.vue'
+    import food from '../food/food.vue'
     export default {
       props: {
         seller: {
@@ -93,8 +97,8 @@
       created(){
 
         this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-        axios.get('/api/goods').then((res) => {
-          res = res.data.data
+        axios.get('http://localhost:8088/ele/api/goods').then((res) => {
+          res = res.data.goods
           this.goods = res
           this.$nextTick(() => {
               this._initScroll();
@@ -113,7 +117,11 @@
               this.foodsScroll.scrollToElement(el, 300);
           },
           selectFood(food,event){
-
+            if (!event._constructed) {
+              return;
+            }
+            this.selectedFood = food;
+            this.$refs.food.show();
           },
           _drop(){
 
@@ -149,7 +157,8 @@
       },
       components:{
           cartcontrol,
-          shopcart
+          shopcart,
+          food
       }
     }
 </script>

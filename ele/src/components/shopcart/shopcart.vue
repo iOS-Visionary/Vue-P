@@ -57,7 +57,7 @@
                   </span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food" v-on:card.add="drop"></cartcontrol>
+                  <cartcontrol :food="food" ></cartcontrol>
                 </div>
               </li>
             </ul>
@@ -74,8 +74,7 @@
   import Vue from 'vue'
   import BScroll from 'better-scroll';
   import cartcontrol from "../cartcontrol/cartcontrol.vue"
-  var eventHub = new Vue()
-
+  import Bus from '../Bus'
   export default{
 
     components:{
@@ -181,8 +180,12 @@
     },
     created() {
       this.$root.eventHub.$on('cart.add', this.drop)
+//      Bus.$on("message",this.test);
     },
     methods:{
+        test(el){
+            console.log(Bus);
+        },
       /*1.0 第一次点击的时候 拿出任意 一个Obj 对象，绑定cartcontrol、show 2.0 v-for 执行li的动画，便利取出Obj.cartControl.show ,
        * 得到 要动画的cartControl的位置。3.0 拿出当前执行动画的 球形对象 ball，进行动画 ps(ball是循环利用的，当太快，drop决定了 最近一个动画 不会被执行)
         *

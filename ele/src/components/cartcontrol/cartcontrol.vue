@@ -11,7 +11,8 @@
 
 <script type="text/ecmascript-6">
   import Vue from 'vue'
-  var eventHub = new Vue()
+//  import Bus from '../Bus'
+//  import Bus2 from '../Bus'
   export default{
       props:{
           food:{
@@ -28,6 +29,8 @@
             }else {
                 this.food.count++;
             }
+//            Bus.$emit("message","enha");
+//            console.log(Bus === Bus2);
 
           this.$root.eventHub.$emit('cart.add', event.target)
           },
