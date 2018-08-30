@@ -40,7 +40,7 @@
               <h1 class="name">{{rating.username}}</h1>
               <div class="star-wrapper">
                 <star  :size="24" :score="rating.score"></star>
-                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
+                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}分钟送达</span>
               </div>
 
               <p class="text">{{rating.text}}</p>
@@ -85,8 +85,17 @@
         };
       },
       created(){
-        axios.get('http://localhost:8088/ele/api/ratings').then((res) => {
-          res = res.data.ratings
+//        axios.get('http://localhost:8088/ele/api/ratings').then((res) => {
+//          res = res.data.ratings
+//          this.ratings = res
+//          this.$nextTick(() => {
+//            this.scroll = new BScroll(this.$refs.ratings, {
+//              click: true
+//            });
+//          });
+//        });
+        axios.get('/api/ratings').then((res) => {
+          res = res.data.data
           this.ratings = res
           this.$nextTick(() => {
             this.scroll = new BScroll(this.$refs.ratings, {
@@ -140,29 +149,35 @@
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/index.styl"
   .ratings
+    position absolute
+    position absolute
+    top: 174px
+    bottom: 0
+    width:100%
+    overflow hidden
     .ratings-content
       .overview
         display flex
+        padding 18px 0
         .overview-left
-          padding 18px 0
           flex 0 0 138px
           width 138px
+          padding 6px 0
           display flex
           flex-direction column
           align-items center
+          border-right  1px solid rgba(147,153,159,0.1)
           .score
             color rgb(255,153,0)
             font-size 24px
             line-height 28px
-            margin 6px auto
+            margin-bottom  6px
           .title
-            display block
             font-size 12px
             color rgb(7,17,27)
             line-height 12px
+            margin-bottom 8px
           .rank
-            display block
-            margin-top 8px
             font-size 10px
             color rgb(7,17,27)
             line-height 10px
@@ -170,7 +185,6 @@
           flex 1
           padding: 6px 0 6px 24px
           .score-wrapper
-            padding-top  18px
             margin-bottom: 8px
             font-size: 0
             .title
@@ -190,34 +204,44 @@
               line-height 18px
               vertical-align: top
           .delivery-wrapper
+            font-size 0
             .title
-              display inline-block
-              margin-right 24px
+              margin-right 12px
               font-size 12px
               color rgb(7,17,27)
               line-height 18px
             .delivery
-              display inline-block
               font-size 12px
               color rgb(147,153,159)
               line-height 18px
 
       .rating-wrapper
+        padding 0 18px
         .rating-item
-          padding 18px
           display flex
+          padding 18px 0
+          border-1px(rgba(7, 17, 27, 0.1))
           .avatar
             flex 0 0 28px
             margin-right 12px
+            img
+              border-radius 50%
           .content
             flex 1
+            position relative
             .name
               font-size 10px
               color rgb(7,17,27)
               line-height 12px
             .star-wrapper
               margin-top 4px
+              font-size 0
+              .star
+                display inline-block
+                margin-right 6px
+                vertical-align top
               .delivery
+                vertical-align top
                 font-size 10px
                 color rgb(147,153,159)
                 line-height 12px
@@ -228,12 +252,31 @@
               color rgb(7,17,27)
               line-height 18px
             .recommend
+              margin-top 8px
+              line-height 16px
+              font-size 0
               .icon-thumb_up
+                display inline-block
                 font-size 12px
                 color rgb(0,160,220)
-                line-height 16px
+                margin 0 8px 4px 0
+                font-size 9px
+              .icon-thumb_up
+                 color: rgb(0, 160, 220)
               .item
                 padding 0 6px
+                font-size 9px
+                color rgb(147,153,159)
+                line-height 16px
+                border-radius 1px
+                background-color rgb(255,255,255)
+                border 1px solid rgba(7,17,27,0.1)
             .time
-              font-size 12px
+              position absolute
+              top 0
+              right 0
+              font-size 10px
+              color rgb(147,153,159)
+              line-height 12px
+
 </style>

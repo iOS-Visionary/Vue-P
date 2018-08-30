@@ -30,13 +30,15 @@ export default {
   },
   created(){
 
-//      axios.get('http://localhost:8080/ele/api/seller').then((res) => {
-//        console.log(res)
+
+//      axios.get('http://localhost:8088/ele/api/seller').then((res) => {
+//        res = res.data.seller
+//        this.seller = res
 //      })
-      axios.get('http://localhost:8088/ele/api/seller').then((res) => {
-        res = res.data.seller
-        this.seller = res
-      })
+    axios.get('/api/seller').then((res) => {
+      res = res.data.data
+      this.seller = res
+    })
   },
   components:{
       'v-header': header
@@ -56,11 +58,11 @@ export default {
     .tab-item
       flex:1
       text-align :center
-      router-link
+      .router-link
         display :block
         font-size :14px
         color: rgb(77, 85, 93)
-        &.active
+        .router-link-active
           font-size :14px
           color: rgb(240,20,20)
 

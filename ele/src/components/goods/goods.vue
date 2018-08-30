@@ -97,8 +97,17 @@
       created(){
 
         this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-        axios.get('http://localhost:8088/ele/api/goods').then((res) => {
-          res = res.data.goods
+//        axios.get('http://localhost:8088/ele/api/goods').then((res) => {
+//          res = res.data.goods
+//          this.goods = res
+//          this.$nextTick(() => {
+//            this._initScroll();
+//            this._calculateHeight();
+//
+//          })
+//        })
+        axios.get('/api/goods').then((res) => {
+          res = res.data.data
           this.goods = res
           this.$nextTick(() => {
               this._initScroll();
