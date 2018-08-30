@@ -20,31 +20,32 @@
           <div class="cartcontrol-wrapper">
             <cartcontrol :food="food"></cartcontrol>
           </div>
-          <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count === 0">假如购物车</div>
+          <div class="buy" @click.stop.prevent="addFirst" v-show="!food.count || food.count === 0">加入购物车</div>
         </div>
-        <split></split>
-        <div class="info">
+        <split v-show="food.info"></split>
+        <div class="info" v-show="food.info">
           <h1 class="title">商品介绍</h1>
           <span class="text">{{food.info}}</span>
         </div>
         <split></split>
         <div class="rating">
           <h1 class="title">商品评价</h1>
-          <div class="neirong"></div>
+          <ratingselect :selectType="selectType" :onlyContent="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
           <div class="rating-wrapper">
-            <ul>
-              <li class="rating-item" v-for="rating in food.ratings">
+            <ul v-show="food.ratings && food.ratings.length">
+              <li class="rating-item border-1px" v-for="rating in food.ratings" v-show="needShow(rating.rateType,rating.text)">
                 <div class="user">
                   <span class="name">{{rating.username}}</span>
                   <img class="avatar" :src="rating.avatar" width="12" height="12"></img>
                 </div>
                 <div class="time">{{rating.rateTime | formatDate}}</div>
                 <p class="text">
-                  <span class="icon-thumb_up"></span>
+                  <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}"></span>
                   {{rating.text}}
                 </p>
               </li>
             </ul>
+            <div class="no-rating" v-show="!food.ratings || !food.ratings.length">暂无评价</div>
           </div>
         </div>
       </div>
@@ -57,6 +58,8 @@
   import cartcontrol from '../cartcontrol/cartcontrol.vue'
   import BScroll from 'better-scroll';
   import Vue from 'vue';
+  import ratingselect from '../ratingselect/ratingselect.vue'
+  import Hub from '../Bus'
 
   const ALL = 2;
   export default {
@@ -78,7 +81,22 @@
               }
           }
       },
+      created(){
+          Hub.$on('ratingtype.select',this.ratingTypeSelect);
+          Hub.$on('content.toggle',this.contentToggle);
+      },
       methods:{
+        needShow(type, text) {
+          if (this.onlyContent && !text) {
+            return false;
+          }
+          if (this.selectType === ALL) {
+            return true;
+          } else {
+            return type === this.selectType;
+          }
+        },
+
           show(){
               this.showFlag = true;
               this.selectType = ALL;
@@ -95,6 +113,18 @@
           },
           hide(){
               this.showFlag = false;
+          },
+          ratingTypeSelect(type){
+            this.selectType = type;
+            this.$nextTick(() => {
+              this.scroll.refresh();
+            });
+          },
+          contentToggle(onlyContent){
+            this.onlyContent = onlyContent;
+            this.$nextTick(() => {
+              this.scroll.refresh();
+            });
           }
       },
       filters:{
@@ -108,6 +138,7 @@
           split,
           cartcontrol,
           BScroll,
+          ratingselect
       }
   }
 </script>

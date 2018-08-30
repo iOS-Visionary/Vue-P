@@ -36,7 +36,6 @@ export default {
       axios.get('http://localhost:8088/ele/api/seller').then((res) => {
         res = res.data.seller
         this.seller = res
-        console.log(res)
       })
   },
   components:{
