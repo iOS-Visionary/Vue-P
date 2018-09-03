@@ -1,22 +1,26 @@
 <template>
   <div id="app">
-    <router-view/>
+    <MyHeader></MyHeader>
+    <Tab></Tab>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
+
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import Tab from './components/tab.vue'
+  import MyHeader from './components/header.vue'
+  export default {
+    name: 'App',
+    components:{
+      Tab,
+      MyHeader,
+    }
+  }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

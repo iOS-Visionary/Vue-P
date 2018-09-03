@@ -3,7 +3,7 @@
  */
 import axios from 'axios'
 let cancel,promiseArr = {};
-const cancelToket = axios.CancelToken;
+const CancelToken = axios.CancelToken;
 
 //取消当前相同请求
 axios.interceptors.request.use(config => {
@@ -68,20 +68,45 @@ axios.interceptors.response.use(response =>{
 })
 
 axios.defaults.headers = {
-  
+
 }
 axios.defaults.timeout = 10000;
 
 export default {
-  get(url,param){
-    return new Promise((resolve,reject)={
+  //get请求
+  get (url,param) {
+    return new Promise((resolve,reject) => {
       axios({
-
-            }).then(res => {
-
+        method: 'get',
+        url,
+        params: param,
+        cancelToken: new CancelToken(c => {
+          cancel = c
+        })
+      }).then(res => {
+        if(res.data.status===0) {
+          resolve(res.data.result)
+        }else{
+          resolve(res.data)
+        }
+      })
     })
+
+
+  },
+  //post请求
+  post (url,param) {
+    return new Promise((resolve,reject) => {
+      axios({
+        method: 'post',
+        url,
+        data: param,
+        cancelToken: new CancelToken(c => {
+          cancel = c
+        })
+      }).then(res => {
+        resolve(res)
+      })
     })
-
-
   }
 }
