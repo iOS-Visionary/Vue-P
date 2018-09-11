@@ -9,7 +9,7 @@
   export default{
       created(){
         initMultipleData(param).then(res =>{
-          console.log(res)
+
         })
       }
   }

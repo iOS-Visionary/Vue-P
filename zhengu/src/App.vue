@@ -21,6 +21,6 @@
   }
 </script>
 
-<style>
-
+<style lang="stylus" rel="stylesheet/stylus">
+  @import "./common/stylus/base.styl"
 </style>
