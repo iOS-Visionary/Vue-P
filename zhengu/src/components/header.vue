@@ -5,7 +5,7 @@
             <div class="input-wrapper">
               <span><input type="text" placeholder="请输入股票名称或代码" v-model="query" ref="stockCode"></span>
               <span><button class="diagnosis">诊断</button></span>
-              <img src="../common/images/close.png" alt="">
+              <img src="../common/images/close.png" alt="" @click="clear">
             </div>
           </div>
           <div class="stock">
@@ -23,11 +23,11 @@
 
             <scroll ref="scroll" class="result" v-show="stockList.length > 0">
               <div>
-                <div class="item">
-                  <span>002600</span>
-                  <span>领益智造</span>
-                  <span><i>深A</i></span>
-                  <span><i>LYZZ</i></span>
+                <div class="item" v-for="item in stockList ">
+                  <span>{{item.split(' ')[0]}}</span>
+                  <span>{{item.split(' ')[1]}}</span>
+                  <span><i>{{item.split(' ')[2]}}</i></span>
+                  <span><i>{{item.split(' ')[3]}}</i></span>
                 </div>
               </div>
             </scroll>
@@ -71,12 +71,16 @@
       }
     },
     methods:{
+      clear(){
+          this.query = '';
+      },
       queryStockData() {
         if (!this.query) {
           return
         }
         let param = {'like': this.query};
         queryStock(param).then(res => {
+            console.log(res)
           this.stockList = res;
         });
       },
