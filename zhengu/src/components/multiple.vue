@@ -46,33 +46,98 @@
         </div>
         <split title="个股股性"></split>
         <div class="stockFeature">
-          <p class="title"><span>涨跌周期</span><span>现位于</span><span>下跌期</span></p>
-          <div class="content">
-            <div class="content-top">
-              <div class="content-left">
-                <span></span>
+          <p class="title"><span>涨跌周期 </span><span>现位于 </span><span>下跌期</span></p>
+
+          <div class="content-one">
+            <div class="down-arrow">
+              <img src="../common/images/down.png" alt="">
+            </div>
+            <div class="content">
+              <div class="top">
+                <span class="left">已下跌 2天</span>
+                <span class="right">跌幅 -1.00%</span>
               </div>
-              <div class="content-right">
-                <div class="top">
-                  <span>已下跌一天</span>
-                  <span>跌幅</span>
-                </div>
-                <div>
-                  <div></div>
-                  <div></div>
-                </div>
+              <div class="bottom">
+                <p><span class="left">下跌周期 9.75天</span><span class="right">五日均价10.11元</span></p>
+                <p><span class="left">平均跌幅 9.75天</span><span class="right">二日均价10.11元</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-two">
+            <div class="down-up">
+              <img src="../common/images/up.png" alt="">
+            </div>
+            <div class="content">
+              <div class="top">
+                <span class="left">上涨周期15天</span>
+                <span class="right">平均跌幅跌幅 -1.00%</span>
+              </div>
+              <div class="bottom">
+                <p>已进入下跌周期末端，可适当参与</p>
               </div>
             </div>
           </div>
         </div>
-        <split></split>
-        <div class="huanShou"></div>
-        <split></split>
-        <div class="pianLi"></div>
-        <split></split>
-        <div class="zhangTing"></div>
-        <split></split>
-        <div class="guJiaPaiMing"></div>
+        <split title="换手率"></split>
+        <div class="huanShou">
+          <div class="circleContent">
+            <myCircle></myCircle>
+            <span>今日换手率</span>
+          </div>
+          <div class="circleContent">
+            <myCircle></myCircle>
+            <span>今日换手率</span>
+          </div>
+          <div class="circleContent">
+            <myCircle></myCircle>
+            <span>今日换手率</span>
+          </div>
+          <div class="circleContent">
+            <myCircle></myCircle>
+            <span>今日换手率</span>
+          </div>
+        </div>
+        <split title="偏离值"></split>
+        <div class="pianLi">
+          <div class="top">
+            <span >近10日偏离值</span>
+            <span style="float: right">1月偏离值</span>
+          </div>
+          <div class="bottom">
+            <span style="float: left">1年内偏离值</span>
+          </div>
+          <div id="mainFive" :style="{width:'7.1rem',height:'4.5rem',margin:'0 auto'}"></div>
+        </div>
+        <split title="涨跌停"></split>
+        <div class="zhangTing">
+          <p class="title">一年内涨停次数为<span>1</span></p>
+          <div class="top">
+            <span >涨停后2日收益 -7.0%</span>
+            <span style="float: right">涨停后5日收益 -7.0%</span>
+          </div>
+          <div class="bottom">
+            <span style="float: left">1年内偏离值</span>
+          </div>
+
+          <p class="title">一年内跌停次数为<span>0</span></p>
+          <div class="top">
+            <span >涨停后2日收益 -7.0%</span>
+            <span style="float: right">涨停后5日收益 -7.0%</span>
+          </div>
+          <div class="bottom">
+            <span style="float: left">1年内偏离值</span>
+          </div>
+          <p>该股不易出现涨停，涨停质量低；不易出现跌停；</p>
+        </div>
+        <split title="个股股价排名"></split>
+        <div class="guJiaPaiMing">
+          <p class="info">  <span class="rank">个股股价排名14/156</span><span class="price">股价10.04元</span></p>
+          <div class="chartsSix">
+            <div id="mainSix" :style="{width:'6.52rem',height:'6rem',margin:'0 auto'}"></div>
+            <span>(元)</span>
+          </div>
+        </div>
       </div>
 
 
@@ -170,6 +235,52 @@
               }
               this.renderChartJZPG(xAxisDataJZPG, yAxisDataJZPG1, yAxisDataJZPG2);
             }
+
+            //偏离值;
+            let xAxisDataPLZ = [];
+            let yAxisDataPLZ1 = [];
+            let yAxisDataPLZ2 = [];
+
+            for (let i = 0; i < this.dataObj.devData.data.length; i++) {
+              let item = this.dataObj.devData.data[i];
+              xAxisDataPLZ.push(item.enddate);
+              yAxisDataPLZ1.push(Number(item.indexGains).toFixed(2));
+              yAxisDataPLZ2.push(Number(item.gains).toFixed(2));
+            }
+            this.renderChartPLZ(xAxisDataPLZ, yAxisDataPLZ1, yAxisDataPLZ2);
+
+
+            //个股股价排名
+            let yAxisDataGJPM = [];
+            let groupList = this.dataObj.rankInfo.rankItem[0].groupList;
+            for (let i = 0; i < groupList.length; i++) {
+              let item = groupList[i];
+              let nextItem = groupList[i + 1];
+              if (nextItem) {
+                if (this.newPrice >= item.min && this.newPrice < nextItem.min) {
+                  yAxisDataGJPM.push({
+                    value: item.number,
+                    itemStyle: {
+                      color: '#f04838'
+                    }
+                  });
+                } else {
+                  yAxisDataGJPM.push(item.number)
+                }
+              } else {
+                if (this.newPrice >= item.min) {
+                  yAxisDataGJPM.push({
+                    value: item.number,
+                    itemStyle: {
+                      color: '#f04838'
+                    }
+                  });
+                } else {
+                  yAxisDataGJPM.push(item.number)
+                }
+              }
+            }
+            this.renderChartGJPM(yAxisDataGJPM);
           },
           renderChartSCRD(xAxisDataSCRD, yAxisDataSCRD) {
             let oneChart = echarts.init(document.getElementById('mainOne'));
@@ -324,6 +435,111 @@
             threeChart.setOption(optionThree)
           })
         },
+        renderChartPLZ(xAxisDataPLZ, yAxisDataPLZ1, yAxisDataPLZ2) {
+          let fiveChart = echarts.init(document.getElementById('mainFive'));
+          let optionFive = null;
+          optionFive = {
+            tooltip: {
+              trigger: 'axis'
+            },
+            xAxis: {
+              type: 'category',
+              data: xAxisDataPLZ,
+              axisLabel: {
+                interval: 100000,
+                showMinLabel: true,
+                showMaxLabel: true,
+              },
+            },
+            yAxis: {
+              type: 'value',
+              axisLabel: {
+                formatter: '{value}%'
+              }
+            },
+            series: [{
+              name: '上证指数',
+              data: yAxisDataPLZ1,
+              type: 'line',
+              smooth: true,
+              showSymbol: false,
+              lineStyle: {
+                color: '#f04838'
+              }
+            }, {
+              name: this.stockName,
+              data: yAxisDataPLZ2,
+              type: 'line',
+              smooth: true,
+              showSymbol: false,
+              lineStyle: {
+                color: 'rgb(38, 129, 228)'
+              }
+            }],
+            grid: {
+              top: 15,
+              left: 15,
+              right: 40,
+              bottom: 15,
+              containLabel: true
+            }
+          };
+          this.$nextTick(() => {
+            fiveChart.setOption(optionFive)
+          })
+        },
+        renderChartGJPM(yAxisDataGJPM) {
+          let sixChart = echarts.init(document.getElementById('mainSix'));
+          let optionSix = null;
+          optionSix = {
+            tooltip: {
+              trigger: 'axis'
+            },
+            xAxis: [{
+              type: 'category',
+              data: ['超低【<5】', '低【5,10】', '中等【10,20】', '中高【20,50】', '高【50,100】', '超高【>100】'],
+              axisPointer: {
+                type: 'shadow'
+              },
+              axisLabel: {
+                interval: 0,
+                rotate: 45,
+                margin: 40,
+                align: 'center',
+              },
+            }],
+            yAxis: [{
+              type: 'value',
+              name: '排名',
+              // max: yMax1,
+            }],
+            series: [{
+              name: '排名',
+              type: 'bar',
+              data: yAxisDataGJPM,
+              barWidth: '25%',
+              itemStyle: {
+                color: 'rgb(38, 129, 228)'
+              },
+              label: {
+                normal: {
+                  show: true,
+                  position: 'top',
+                }
+              }
+            }],
+            grid: {
+              top: 40,
+              left: 0,
+              right: 10,
+              bottom: 0,
+              containLabel: true
+            }
+          };
+          this.$nextTick(() => {
+            sixChart.setOption(optionSix)
+          })
+        },
       }
   }
 
@@ -435,30 +651,134 @@
         margin 0 auto
         padding-bottom: 0.15rem;
         .title
-          font-size: 0.26rem;
+          font-size: 0.3rem;
           height: 0.6rem;
           line-height: 0.6rem;
           border-bottom: 1px solid #f0f0f0;
           text-indent: 0.2rem;
-        .content
-          width 100%
-          .content-top
-            width 100%
-            .content-left
-              width 30%
-              span
-                background-image url("../common/images/up.png")
-                background-repeat:no-repeat;
-            .content-right
-              width 70%
-              .top
-                display: inline-block;
-                font-size 0.34rem
-                height: 0.95rem;
-                line-height: 0.95rem;
-                border-bottom 1px solid #f0f0f0
-                span:nth-child(1)
-                  float left
-                span:nth-child(2)
-                  float right
+        .content-one
+          font-size 0.32rem
+          display flex
+          border-bottom 1px solid #f0f0f0
+          .down-arrow
+            flex 2
+            img
+              display: block;
+              margin: 0.2rem auto;
+              width: 0.4rem;
+              height: 0.55rem;
+          .content
+            flex 8
+            .top
+              border-bottom 1px solid #f0f0f0
+              height: 0.95rem;
+              line-height: 0.95rem;
+              .left
+                float left
+              .right
+                float right
+            .bottom
+              height: 0.6rem;
+              line-height: 0.6rem;
+              font-size 0.3rem
+              .left
+                float left
+              .right
+                float right
+        .content-two
+          font-size 0.32rem
+          display flex
+          border-bottom 1px solid #f0f0f0
+          .down-up
+            flex 2
+            img
+              display: block;
+              margin: 0.2rem auto;
+              width: 0.4rem;
+              height: 0.55rem;
+          .content
+            flex 8
+            .top
+              border-bottom 1px solid #f0f0f0
+              height: 0.95rem;
+              line-height: 0.95rem;
+              .left
+                float left
+              .right
+                float right
+            .bottom
+              font-size 0.3rem
+              height: 0.6rem;
+              line-height: 0.6rem;
+      .huanShou
+        width 90%
+        margin 0 auto
+        padding-bottom: 0.15rem;
+        display flex
+        .circleContent
+          font-size 0.20rem
+          flex 0 0 1
+          span
+            display block
+            margin 10px auto
+            text-align center
+      .pianLi
+        width 90%
+        margin 0 auto
+        padding-bottom: 0.15rem;
+        overflow hidden
+        line-height: 0.6rem;
+
+        .top
+          height 0.6rem
+          font-size 0.3rem
+        .bottom
+          border-bottom 1px solid #f0f0f0
+          height 0.6rem
+          font-size 0.3rem
+      .zhangTing
+        width 90%
+        margin 0 auto
+        padding-bottom: 0.15rem;
+        overflow hidden
+        line-height: 0.6rem;
+        font-size 0.3rem
+        .title
+          font-size: 0.3rem;
+          height: 0.6rem;
+          line-height: 0.6rem;
+          border-bottom: 1px solid #f0f0f0;
+        .top
+          height 0.6rem
+          font-size 0.3rem
+        .bottom
+          border-bottom 1px solid #f0f0f0
+          height 0.6rem
+          font-size 0.3rem
+      .guJiaPaiMing
+        width 90%
+        margin 0 auto
+        padding-bottom: 0.15rem;
+        .info
+          background: rgb(242, 131, 122);
+          margin-top 0.1rem
+          padding-bottom: 0.15rem;
+          line-height 0.45rem
+          .price
+            color white
+            font-size: 0.3rem;
+            vertical-align middle
+          .rank
+            color white
+            font-size: 0.32rem;
+            vertical-align middle
+            padding: 0 0.3rem 0 0.2rem;
+        .chartsSix
+          position: relative;
+          font-size: 0.26rem;
+          span
+            position: absolute;
+            right: 0.2rem;
+            bottom: 2.1rem;
+
 </style>
