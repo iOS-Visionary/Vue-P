@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Main from './app/pages/Main'
 
 export default class Client extends Component {
   render() {
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('Client', () => Client);
+AppRegistry.registerComponent('Client', () => Main);

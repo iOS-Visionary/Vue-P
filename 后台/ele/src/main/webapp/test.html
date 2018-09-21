@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="apple-itunes-app" content="app-id=937114242"> -->
+    <title>Title</title>
+    <script src="mobile-detect.js"></script>
+    <script>     
+       var md = new MobileDetect(window.navigator.userAgent);
+       var os = md.os();
+       var version = md.version("iPhone")
+        if(os == "iOS" ){//打开h5开户
+        	  window.location.href = "yx://" 
+        	  window.setTimeout(function(){
+            	//下载app的地址
+            	window.location.href = "https://itunes.apple.com/cn/appid937114242?mt=8";
+    
+        	  },2000) 
+        }else {//安卓
+            //nothing
+        }
+    </script>
+
+</head>
+<body>
+	<div></div>
+</body>
+</html>
