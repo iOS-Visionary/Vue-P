@@ -30,7 +30,8 @@
                       v-on:before-enter = "beforeEnter"
                       v-on:enter="enter"
                       v-on:after-enter="afterEnter"
-                      v-for="(ball,index) in balls">
+                      v-for="(ball,index) in balls"
+                      :key="index">
 
           <div class="ball" v-show="ball.show" >
             <div class="inner inner-hook"></div>
