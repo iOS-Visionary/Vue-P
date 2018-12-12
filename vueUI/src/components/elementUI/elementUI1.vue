@@ -3,7 +3,9 @@
     <div v-for="group in navs">
       <div class="page-title">{{group.title}}</div>
       <mt-cell v-for="(item,index) in group.list"
-               :key="index">
+               :key="index"
+                :to="'/elementUI'+item.path"
+                is-link>
         <div slot="title">
           <i :class="['indexicon', 'mintui-search']"></i>
           <span>{{item.name}}</span>
