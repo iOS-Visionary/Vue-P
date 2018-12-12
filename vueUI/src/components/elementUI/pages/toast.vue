@@ -55,7 +55,7 @@
     },
 
     created() {
-      for (let i = 1; i <= 20; i++) {
+      for (let i = 1; i <= 3; i++) {
         this.list.push(i);
       }
     },

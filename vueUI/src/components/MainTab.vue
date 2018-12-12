@@ -2,30 +2,33 @@
     <div class="MainTab">
       <router-link class="tab-item" to="/elementUI" tag="div">
         <div>
-          <div class="item-text">eleUI</div>
           <span class="item-icon" ></span>
+          <div class="item-text">eleUI</div>
+
           <!--<img class="item-icon" src="../../static/img/project_normal@3x.png" alt="">-->
         </div>
       </router-link>
 
       <router-link class="tab-item" to="/vueX" tag="div">
         <div>
-          <div class="item-text">vueX</div>
           <span class="item-icon" ></span>
+          <div class="item-text">vueX</div>
+
         </div>
       </router-link>
 
       <router-link class="tab-item" to="/iView" tag="div">
         <div >
-          <div class="item-text">iView</div>
           <span class="item-icon"></span>
+          <div class="item-text">iView</div>
+
         </div>
       </router-link>
 
       <router-link class="tab-item" to="/other" tag="div">
         <div >
-          <div class="item-text">other</div>
           <span class="item-icon"></span>
+          <div class="item-text">other</div>
         </div>
       </router-link>
 
@@ -52,10 +55,11 @@
       .item-text{
         text-align: center;
         font-size: 14px;
+        margin-top: 4px;
       }
       .item-icon{
         display: block;
-        margin: 7px auto;
+        margin: 3px auto;
         width: 20px;
         height: 20px;
         background-size: 20px 20px;

@@ -5,6 +5,9 @@ import vueX from '../components/vueX/vueX1.vue'
 import iView from '../components/iView/iView1.vue'
 import other from '../components/other/other1.vue'
 import toast from '../components/elementUI/pages/toast.vue'
+import header from '../components/elementUI/pages/header.vue'
+import switch1 from '../components/elementUI/pages/switch.vue'
+
 
 Vue.use(Router)
 
@@ -38,12 +41,12 @@ export default new Router({
     {
       path: '/elementUI/header',
       name: 'header',
-      component: toast
+      component: header
     },
     {
       path: '/elementUI/switch',
       name: 'switch',
-      component: toast
+      component: switch1
     },
   ]
 })
