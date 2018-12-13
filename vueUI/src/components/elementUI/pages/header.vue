@@ -12,13 +12,13 @@
       </mt-navbar>
       <mt-tab-container v-model="selected" swipeable>
         <mt-tab-container-item id="one">
-          <mt-cell v-for="n in 5">one{{n}}</mt-cell>
+          <mt-cell v-for="n in 5" :key="n">one{{n}}</mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="two">
-          <mt-cell v-for="n in 5">two{{n}}</mt-cell>
+          <mt-cell v-for="n in 5" :key="n">two{{n}}</mt-cell>
         </mt-tab-container-item>
         <mt-tab-container-item id="three">
-          <mt-cell v-for="n in 5">three{{n}}</mt-cell>
+          <mt-cell v-for="n in 5" :key="n">three{{n}}</mt-cell>
         </mt-tab-container-item>
       </mt-tab-container>
     </div>

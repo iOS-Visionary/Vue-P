@@ -22,3 +22,7 @@ export default {
 @import "assets/font/iconfont.css";
 </style>
 
+<style lang="less">
+  @import '~vux/src/styles/1px.less';
+</style>
+

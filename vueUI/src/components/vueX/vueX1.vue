@@ -1,5 +1,5 @@
 <template>
-    <div>vuex</div>
+    <div class="vux-1px-b">vuex</div>
 </template>
 
 <script type="text/ecmascript-6">
