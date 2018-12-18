@@ -44,9 +44,10 @@
       Grid
     },
     methods: {
-      onItemChange(val){
-        console.log(1)
-        console.log(val)
+      onItemChange(){
+        console.log('hahahah')
+        var path = this.$route.path;
+        console.log(path);
       },
       segementClick(val){
         console.log(val)

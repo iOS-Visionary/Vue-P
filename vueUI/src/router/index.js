@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import elementUI from '../components/elementUI/elementUI1.vue'
+import test1 from '../components/elementUI/Test.vue'
 import vueX from '../components/vueX/vueX1.vue'
 import vuex2 from '../components/vueX/vux2.vue'
 import vuex3 from '../components/vueX/vux3.vue'
@@ -57,6 +58,11 @@ export default new Router({
       path: '/elementUI/header',
       name: 'header',
       component: header
+    },
+    {
+      path: '/elementUI/test',
+      name: 'test',
+      component: test1
     },
     {
       path: '/elementUI/switch',

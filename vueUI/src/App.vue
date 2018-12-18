@@ -6,14 +6,14 @@
       首页
     </x-header>
     <router-view class="routerview"/>
-    <tabbar class="tabbar-wrapper" @on-index-change="tabbarDidSelecte" link="/elementUI">
+    <tabbar class="tabbar-wrapper" @on-index-change="tabbarDidSelecte">
       <tabbar-item :selected="true">
         <img slot="icon" src="../static/img/project_normal@3x.png" alt="">
         <img slot="icon-active" src="../static/img/project_selected@3x.png" alt="">
         <span slot="label">elementUI</span>
       </tabbar-item>
 
-      <tabbar-item badge="2" link="/vueX">
+      <tabbar-item badge="2">
         <img slot="icon" src="../static/img/task_normal@3x.png" alt="">
         <img slot="icon-active" src="../static/img/task_selected@3x.png" alt="">
         <span slot="label">vux</span>
@@ -40,35 +40,56 @@
       Tabbar,
       mainTab
     },
+    data(){
+      return {
+        tabPath1: "/elementUI",
+        tabPath2: "/vueX"
+      }
+    },
     methods: {
-      tabbarDidSelecte(newIndex , oldIndex){
-        switch(newIndex)
-        {
-          case 0:
-          {
-              this.$router.push('/elementUI')
+      tabbarDidSelecte(newIndex, oldIndex){
+        this.recordRoute(oldIndex);
+        switch (newIndex) {
+          case 0: {
+            this.$router.replace(this.tabPath1)
           }
             break;
-          case 1:
-          {
-            this.$router.push('/vueX')
+          case 1: {
+            this.$router.replace(this.tabPath2)
           }
             break;
-          default:
-          {
+          default: {
 
           }
         }
         console.log(oldIndex, newIndex)
+
+      },
+      recordRoute(oldIndex){
+        switch (oldIndex) {
+          case 0: {
+              this.tabPath1 = this.$route.path;
+          }
+            break;
+          case 1: {
+            this.tabPath2 = this.$route.path;
+          }
+            break;
+          default: {
+
+          }
+        }
       }
     },
-    computed:{
+
+    computed: {
       leftOptions () {
         return {
           showBack: this.$route.path !== '/' && this.$route.path !== '/elementUI' && this.$route.path !== '/vueX'
         }
       },
     }
+
 
   }
 </script>
@@ -80,7 +101,8 @@
   .weui-cells {
     margin-top: 0px !important;
   }
-  .routerview{
+
+  .routerview {
     width: 100%;
     padding-top: 46px;
     padding-bottom: 56px;
