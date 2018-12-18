@@ -24,7 +24,7 @@
         Calendar,
         Group,
         ButtonTab,
-        ButtonTabItem
+        ButtonTabItem,
       },
       data () {
         return {

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import elementUI from '../components/elementUI/elementUI1.vue'
 import vueX from '../components/vueX/vueX1.vue'
+import vuex2 from '../components/vueX/vux2.vue'
+import vuex3 from '../components/vueX/vux3.vue'
+import vuex4 from '../components/vueX/vux4.vue'
 import iView from '../components/iView/iView1.vue'
 import other from '../components/other/other1.vue'
 import toast from '../components/elementUI/pages/toast.vue'
@@ -14,6 +17,21 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/vuex4',
+      name: 'vuex4',
+      component: vuex4
+    },
+    {
+      path: '/vuex3',
+      name: 'vuex3',
+      component: vuex3
+    },
+    {
+      path: '/',
+      name: 'elementUI',
+      component: elementUI
+    },
+    {
       path: '/elementUI',
       name: 'elementUI',
       component: elementUI
@@ -21,7 +39,7 @@ export default new Router({
     {
       path: '/vueX',
       name: 'vueX',
-      component: vueX
+      component: vuex2
     },
     {
       path: '/iView',

@@ -15,5 +15,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
-router.push('/elementUI')
+// router.push('/elementUI')
 
