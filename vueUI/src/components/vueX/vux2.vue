@@ -10,13 +10,13 @@
                      ref="loadmore">
           <group>
             <swiper :list="demo_list" :aspect-ratio="549.0/1125.0" :loop="true"></swiper>
-            <cell title="Live Demo" link="/elementUI">
+            <cell title="Live Demo" link="/vueX/vuex3">
               <span class="demo-icon" slot="icon" style="color:#F70968">&#xe633;</span>
             </cell>
-            <cell title="Live Demo" link="/vuex3">
+            <cell title="Live Demo" link="/vueX/vuex4">
               <span class="demo-icon" slot="icon" style="color:#F70968">&#xe633;</span>
             </cell>
-            <cell title="Live Demo" link="/vuex4">
+            <cell title="Live Demo" link="/vueX/vuex5">
               <span class="demo-icon" slot="icon" style="color:#F70968">&#xe633;</span>
             </cell>
             <cell title="Github" link="http://github.com/airyland/vux" value="Star me">

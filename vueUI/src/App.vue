@@ -3,7 +3,7 @@
     <!--<main-tab style="display: none"></main-tab>-->
 
     <x-header :left-options="leftOptions" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
-      This is the page title.
+      首页
     </x-header>
     <router-view class="routerview"/>
     <tabbar class="tabbar-wrapper" @on-index-change="tabbarDidSelecte" link="/elementUI">
@@ -41,14 +41,31 @@
       mainTab
     },
     methods: {
-      tabbarDidSelecte(oldIndex, newIndex){
+      tabbarDidSelecte(newIndex , oldIndex){
+        switch(newIndex)
+        {
+          case 0:
+          {
+              this.$router.push('/elementUI')
+          }
+            break;
+          case 1:
+          {
+            this.$router.push('/vueX')
+          }
+            break;
+          default:
+          {
+
+          }
+        }
         console.log(oldIndex, newIndex)
       }
     },
     computed:{
       leftOptions () {
         return {
-          showBack: this.$route.path !== '/'
+          showBack: this.$route.path !== '/' && this.$route.path !== '/elementUI' && this.$route.path !== '/vueX'
         }
       },
     }

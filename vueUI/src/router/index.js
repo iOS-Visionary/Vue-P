@@ -16,40 +16,37 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/vuex4',
-      name: 'vuex4',
-      component: vuex4
-    },
-    {
-      path: '/vuex3',
-      name: 'vuex3',
-      component: vuex3
-    },
-    {
-      path: '/',
-      name: 'elementUI',
-      component: elementUI
-    },
-    {
-      path: '/elementUI',
-      name: 'elementUI',
-      component: elementUI
-    },
+
     {
       path: '/vueX',
       name: 'vueX',
       component: vuex2
     },
     {
-      path: '/iView',
-      name: 'iView',
-      component: iView
+      path: '/vueX/vuex3',
+      name: 'vuex3',
+      component: vuex3
     },
     {
-      path: '/other',
-      name: 'other',
-      component: other
+      path: '/vueX/vuex4',
+      name: 'vuex4',
+      component: vuex4
+    },
+    {
+      path: '/vueX/vuex5',
+      name: 'vuex5',
+      component: vueX
+    },
+
+    {
+      path: '/',
+      name: 'main',
+      component: elementUI
+    },
+    {
+      path: '/elementUI',
+      name: 'elementUI',
+      component: elementUI
     },
     {
       path: '/elementUI/toast',
@@ -65,6 +62,16 @@ export default new Router({
       path: '/elementUI/switch',
       name: 'switch',
       component: switch1
+    },
+    {
+      path: '/iView',
+      name: 'iView',
+      component: iView
+    },
+    {
+      path: '/other',
+      name: 'other',
+      component: other
     },
   ]
 })
