@@ -1,9 +1,26 @@
 <template>
-    <div>neha</div>
+  <div>
+    <x-header :left-options="leftOptions" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+      搜索
+    </x-header>
+  </div>
+
 </template>
 
 <script type="text/ecmascript-6">
-    export default{}
+  import XHeader from "../../../node_modules/vux/src/components/x-header/index";
+  export default{
+    components: {
+      XHeader
+    },
+    computed: {
+      leftOptions () {
+        return {
+          showBack: this.$route.path !== '/search/0'
+        }
+      },
+    }
+  }
 </script>
 
 <style rel="stylesheet/scss" lang="scss">

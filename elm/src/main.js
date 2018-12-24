@@ -5,7 +5,6 @@ import routes from './router/router'
 import VueRouter from 'vue-router'
 import {routerMode} from './config/env'
 import FastClick from 'fastclick'
-import App from "./App.vue"
 
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function() {
