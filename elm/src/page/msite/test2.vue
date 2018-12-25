@@ -1,14 +1,47 @@
-<template>
-    <div style="height: 8000px;background-color: gray">
 
+<template>
+    <div >
+      <swiper style="width:100%;margin:0 auto;width: 100%;" :aspect-ratio="177/375" dots-position="center">
+        <swiper-item class="test">
+          <grid  :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
+            <grid-item label="九宫格" v-for="i in 8" :key="i">
+              <img slot="icon" src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/">
+            </grid-item>
+          </grid>
+        </swiper-item>
+
+        <swiper-item class="test">
+          <grid  :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
+            <grid-item label="九宫格" v-for="i in 8" :key="i">
+              <img slot="icon" src="https://fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/">
+            </grid-item>
+          </grid>
+        </swiper-item>
+
+      </swiper>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
-    export default {}
+  import { Swiper } from 'vux'
+  import SwiperItem from "../../../node_modules/vux/src/components/swiper/swiper-item";
+  import Grid from "../../../node_modules/vux/src/components/grid/grid";
+  import GridItem from "../../../node_modules/vux/src/components/grid/grid-item";
+    export default {components: {
+      GridItem,
+      Grid,
+      SwiperItem,
+      Swiper}}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" rel="stylesheet/stylus">
-
+  /*.weui-grid:after*/
+    /*border-bottom none*/
 </style>
+<style>
+  .test /deep/ .weui-grid:after{
+    border-bottom: none;
+  }
+</style>
+

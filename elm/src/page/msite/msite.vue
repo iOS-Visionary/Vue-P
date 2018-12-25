@@ -5,7 +5,7 @@
     </x-header>
     <div class="demo-list-box" id="demo_list_box">
       <group class="group">
-        <cell v-for="n in 100">{{n}}</cell>
+        <cell v-for="n in 100" :key="n">{{n}}</cell>
       </group>
     </div>
   </div>
@@ -73,6 +73,7 @@
     position: relative;
     top: -1.17rem;
   }
+
   /*.weui-cells{*/
     /*margin-top: 0px;*/
   /*}*/
