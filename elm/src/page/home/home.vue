@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
       <x-header :left-options="leftOptions" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
         无
       </x-header>

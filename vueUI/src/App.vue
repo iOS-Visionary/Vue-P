@@ -120,5 +120,8 @@
     width: 100%;
     overflow-x: hidden;
   }
+  *{
+    -webkit-overflow-scrolling: touch;
+  }
 </style>
 

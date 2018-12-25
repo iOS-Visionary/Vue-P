@@ -23,6 +23,7 @@
               <span class="demo-icon" slot="icon" style="color:#35495e;">&#xe62f;</span>
             </cell>
             <cell v-for="(item,index) in list" :key="index">{{item}}</cell>
+            <cell v-for="n in 100">{{n}}</cell>
           </group>
           <div slot="top" class="mint-loadmore-top">
             <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
