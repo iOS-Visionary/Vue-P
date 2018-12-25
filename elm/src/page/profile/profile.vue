@@ -20,4 +20,9 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+  .vux-header{
+    position: sticky!important;
+    top: 0px !important;
+    z-index: 999 !important;
+  }
 </style>

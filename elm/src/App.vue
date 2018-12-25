@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
          style="position:absolute;width:0;height:0">
       <defs>
@@ -300,8 +300,6 @@
   /*}*/
   .router-view {
     width: 100%;
-    padding-top: 46px;
-    padding-bottom: 56px;
   }
 
   .Main {
@@ -320,9 +318,16 @@
   @import '~vux/src/styles/1px.less';
   @import '~vux/src/styles/tap.less';
   html, body {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
+    /* 加上会自动隐藏**/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*overflow-x: hidden;*/
+  }
+  .weui-tabbar{
+    position: fixed!important;
+    left: 0;
+    right: 0;
+    bottom: 0!important;
   }
 
 </style>

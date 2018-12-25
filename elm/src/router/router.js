@@ -3,7 +3,7 @@ import App from "../App.vue"
 const home = r => require.ensure([],() => r(require('../page/home/home.vue')),'home')
 const city = r => require.ensure([],() => r(require('../page/city/city.vue')),'city')
 const msite = r => require.ensure([],() => r(require('../page/msite/msite.vue')),'msite')
-const test = r => require.ensure([],() => r(require('../page/msite/test.vue')),'test')
+const test = r => require.ensure([],() => r(require('../page/msite/test2.vue')),'test')
 const order = r => require.ensure([],() => r(require('../page/order/order.vue')),'order')
 const profile = r => require.ensure([],() => r(require('../page/profile/profile.vue')),'profile')
 const search = r => require.ensure([],() => r(require('../page/search/search.vue')),'search')
@@ -26,7 +26,7 @@ export default [{
     },
     {
       path:'/msite',
-      component:test
+      component:msite
     },
     {
       path:'/order',
