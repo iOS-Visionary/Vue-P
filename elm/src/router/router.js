@@ -26,7 +26,7 @@ export default [{
     },
     {
       path:'/msite',
-      component:test
+      component:msite
     },
     {
       path:'/order',

@@ -6,6 +6,8 @@ import routes from './router/router'
 import VueRouter from 'vue-router'
 import {routerMode} from './config/env'
 import FastClick from 'fastclick'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function() {
@@ -16,6 +18,7 @@ if ('addEventListener' in document) {
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(MintUI)
 
 const shouldUseTransition = !/transition=none/.test(location.href)
 
